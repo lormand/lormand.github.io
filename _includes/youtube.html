@@ -1,0 +1,12 @@
+<div class="yt">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/{{ include.id }}"
+    title="{{ include.title | default: 'YouTube video' | escape }}"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+{% if include.title %}
+  <p class="yt-caption">{{ include.title }}</p>
+{% endif %}

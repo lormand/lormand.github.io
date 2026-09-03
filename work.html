@@ -1,0 +1,35 @@
+---
+title: Work
+description: Lime Creek Road and later series.
+permalink: /work/
+---
+
+<header class="page-mast">
+  <p class="eyebrow">Series</p>
+  <h1>Lime Creek<br>Road</h1>
+  <p class="lede">First gallery. Weekly canyon sports-car shoots.</p>
+</header>
+
+<div class="page-body">
+  {% assign shoots = site.series | sort: "date" | reverse %}
+  {% if shoots.size == 0 %}
+    <p class="muted">No series yet.</p>
+  {% else %}
+    <ul class="work-list">
+      {% for shoot in shoots %}
+        <li class="work-card">
+          <p class="eyebrow">{{ shoot.series }}{% if shoot.week %} · Week {{ shoot.week }}{% endif %}</p>
+          <h2><a href="{{ shoot.url | relative_url }}">{{ shoot.title }}</a></h2>
+          <p class="series-meta">
+            {% if shoot.location %}<span>{{ shoot.location }}</span>{% endif %}
+            <time datetime="{{ shoot.date | date: '%Y-%m-%d' }}">{{ shoot.date | date: '%d %b %Y' }}</time>
+          </p>
+          {% if shoot.stills %}
+            {% assign cover = shoot.stills | first %}
+            <a href="{{ shoot.url | relative_url }}">{% include still.html still=cover %}</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>

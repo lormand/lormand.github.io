@@ -1,27 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>lormand.com</title>
-  <style>
-    html, body { height: 100%; margin: 0; }
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-      display: grid;
-      place-items: center;
-      background: #111;
-      color: #eee;
-    }
-    main { text-align: center; }
-    h1 { font-weight: 600; letter-spacing: -0.02em; }
-    p { color: #999; }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>Hello world.</h1>
-    <p>lormand.com</p>
-  </main>
-</body>
-</html>
+---
+title: Lime Creek Road
+description: Stills and motion from Austin canyon roads. Lime Creek Road first.
+body_class: home
+---
+
+{% assign featured = site.series | where: "featured", true | sort: "date" | reverse | first %}
+{% if featured %}
+<section class="hero" aria-label="Featured still">
+  <div class="hero-still">
+    <img
+      src="{{ featured.hero | relative_url }}"
+      alt="Placeholder still: aerial dusk view of Lime Creek Road along the water, headlights on the curve."
+      width="1536"
+      height="1024"
+      fetchpriority="high">
+    <span class="watermark" aria-hidden="true">lormand</span>
+    <span class="placeholder-tag">Placeholder still</span>
+  </div>
+  <div class="hero-copy">
+    <p class="eyebrow">Austin · Canyon film</p>
+    <h1>Lime<br>Creek<br>Road</h1>
+    <p class="lede">Weekly sports-car film on a two-lane that drops toward the water. Stills here. Motion on YouTube.</p>
+  </div>
+</section>
+{% endif %}
+
+<section class="band positioning">
+  <h2 class="section-kicker">Position</h2>
+  <p>Public showcase for stills and motion from Austin-area canyon roads and lake weather. Not a studio deck. One series first: Lime Creek Road, shot like a title sequence — large night, small chrome, machines at speed.</p>
+</section>
+
+{% if featured %}
+<section class="band" aria-labelledby="featured-kicker">
+  <h2 class="section-kicker" id="featured-kicker">Featured series</h2>
+  <p class="muted">{{ featured.location }} · {{ featured.date | date: "%d %b %Y" }}</p>
+  <ul class="featured-grid gallery-grid">
+    {% for still in featured.stills limit: 3 %}
+      <li>{% include still.html still=still %}</li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ featured.url | relative_url }}">Open Lime Creek Road</a></p>
+</section>
+{% endif %}
+
+<section class="band film-well" aria-labelledby="latest-kicker">
+  <h2 class="section-kicker" id="latest-kicker">Latest on YouTube</h2>
+  <p class="muted">Pulled from public RSS for @atxdroneguild and @route66roadkill. No API key. Livestream placeholders are skipped when a finished upload exists.</p>
+  {% if site.data.videos.latest and site.data.videos.latest.size > 0 %}
+    <div class="embed-stack">
+      {% for yt in site.data.videos.latest %}
+        {% include youtube.html id=yt.id title=yt.title %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="latest-empty">No videos in the RSS cache yet. Run <code>python3 scripts/fetch_youtube.py</code> or the weekday GitHub Action.</p>
+  {% endif %}
+</section>

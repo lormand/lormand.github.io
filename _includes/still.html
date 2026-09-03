@@ -1,0 +1,18 @@
+<figure class="still{% if include.still.placeholder %} is-placeholder{% endif %}">
+  <div class="still-frame">
+    <img
+      src="{{ include.still.src | relative_url }}"
+      alt="{{ include.still.alt | escape }}"
+      width="1400"
+      height="933"
+      loading="{{ include.still.loading | default: 'lazy' }}"
+      decoding="async">
+    <span class="watermark" aria-hidden="true">lormand</span>
+    {% if include.still.placeholder %}
+      <span class="placeholder-tag">Placeholder still</span>
+    {% endif %}
+  </div>
+  {% if include.still.caption %}
+    <figcaption>{{ include.still.caption }}</figcaption>
+  {% endif %}
+</figure>
