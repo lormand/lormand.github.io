@@ -1,0 +1,14 @@
+{% comment %}
+  Future site extensions. v1 ships none of these.
+  Add comments.html / mailing-list.html / accounts.html later and flip
+  site.features in _config.yml — the default layout already includes this file.
+{% endcomment %}
+{% if site.features.comments %}
+  {% include comments.html %}
+{% endif %}
+{% if site.features.mailing_list %}
+  {% include mailing-list.html %}
+{% endif %}
+{% if site.features.accounts %}
+  {% include accounts.html %}
+{% endif %}

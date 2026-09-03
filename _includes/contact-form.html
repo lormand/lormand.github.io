@@ -1,0 +1,31 @@
+{% comment %}
+  Working-shaped contact form.
+  Replace YOUR_FORM_ID with a Formspree form id (e.g. xyzabcde).
+  Until then, site.js intercepts submit and opens a mailto to site.email.
+{% endcomment %}
+<form
+  class="contact-form"
+  action="https://formspree.io/f/YOUR_FORM_ID"
+  method="POST"
+  data-formspree-id="YOUR_FORM_ID"
+  data-mailto="{{ site.email }}">
+  <p class="form-flag" role="note">
+    Formspree endpoint is a placeholder (<code>YOUR_FORM_ID</code>).
+    Until that is replaced, send uses a mailto fallback to
+    <a href="mailto:{{ site.email }}">{{ site.email }}</a>.
+  </p>
+  <label>
+    Name
+    <input type="text" name="name" autocomplete="name" required>
+  </label>
+  <label>
+    Email
+    <input type="email" name="email" autocomplete="email" required>
+  </label>
+  <label>
+    Message
+    <textarea name="message" rows="6" required></textarea>
+  </label>
+  <input type="hidden" name="_subject" value="lormand.com contact">
+  <button type="submit">Send</button>
+</form>

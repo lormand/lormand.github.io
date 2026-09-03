@@ -1,0 +1,57 @@
+title: lormand
+description: Stills and motion from Austin canyon roads. Lime Creek Road first.
+url: https://lormand.com
+baseurl: ""
+email: randy@lormand.com
+
+# v1 flags — flip these later without rewriting layouts.
+features:
+  comments: false
+  mailing_list: false
+  accounts: false
+
+social:
+  instagram: https://www.instagram.com/atxdroneguild/
+  youtube:
+    - https://www.youtube.com/@atxdroneguild
+    - https://www.youtube.com/@route66roadkill
+
+collections:
+  series:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: series
+    values:
+      layout: series
+
+# Do not publish repo docs as Pages.
+exclude:
+  - README.md
+  - REQUIREMENTS.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts
+  - .github
+  - .gitignore
+  - .bundle
+
+include:
+  - CNAME
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+permalink: pretty
+markdown: kramdown
+highlighter: rouge
+timezone: America/Chicago

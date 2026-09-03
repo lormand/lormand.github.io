@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<article class="series">
+  <header class="series-mast">
+    <p class="eyebrow">{{ page.series }}{% if page.week %} · Week {{ page.week }}{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="series-meta">
+      {% if page.location %}<span>{{ page.location }}</span>{% endif %}
+      {% if page.date %}<time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%d %b %Y' }}</time>{% endif %}
+    </p>
+    {% if page.content != blank %}
+      <div class="prose">{{ content }}</div>
+    {% endif %}
+  </header>
+
+  {% if page.stills %}
+  <section class="gallery" aria-label="Stills">
+    <h2 class="section-kicker">Stills</h2>
+    <ul class="gallery-grid">
+      {% for still in page.stills %}
+        <li>
+          {% include still.html still=still %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if page.youtube %}
+  <section class="film-well" aria-label="Motion">
+    <h2 class="section-kicker">Motion</h2>
+    <p class="muted">YouTube embeds. No files in this repo.</p>
+    <div class="embed-stack">
+      {% for yt in page.youtube %}
+        {% include youtube.html id=yt.id title=yt.title %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</article>
